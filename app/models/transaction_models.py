@@ -1,7 +1,6 @@
 from sqlalchemy import Column, Integer, String, Float, DateTime
 from sqlalchemy.sql import func
-
-from app.db.database import Base
+from app.db.session import Base
 
 
 class Transaction(Base):
@@ -13,6 +12,6 @@ class Transaction(Base):
     from_address = Column(String, index=True)
     to_address = Column(String, index=True)
     value = Column(Float)
-    gas = Column(Integer)
-    gas_price = Column(Float)
+    gas_used = Column(Integer)
+    gas_price_wei = Column(Float)
     timestamp = Column(DateTime(timezone=True), server_default=func.now())

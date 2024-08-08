@@ -1,6 +1,5 @@
 from pydantic import BaseModel
 from datetime import datetime
-from typing import Optional
 
 
 class TransactionBase(BaseModel):
@@ -9,8 +8,8 @@ class TransactionBase(BaseModel):
     from_address: str
     to_address: str
     value: float
-    gas: int
-    gas_price: float
+    gas_used: int
+    gas_price_wei: float
 
 
 class TransactionCreate(TransactionBase):
