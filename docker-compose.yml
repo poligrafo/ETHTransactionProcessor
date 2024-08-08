@@ -12,6 +12,11 @@ services:
     ports:
       - "5454:5432"
 
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
   web:
     build: .
     command: ./wait_for_db.sh poetry run hypercorn app.main:app --bind 0.0.0.0:8000
@@ -21,8 +26,10 @@ services:
       - "8000:8000"
     depends_on:
       - db
+      - redis
     environment:
       DATABASE_URL: postgresql+asyncpg://user:password@db:5432/etherflow
+      INFURA_API_KEY: your_infura_api_key
 
   alembic:
     build:
@@ -34,6 +41,16 @@ services:
       DATABASE_URL: postgresql+asyncpg://user:password@db:5432/etherflow
     volumes:
       - .:/app
+
+  celery:
+    build: .
+    command: celery -A app.celery.config.celery_app worker --loglevel=info
+    depends_on:
+      - db
+      - redis
+    environment:
+      DATABASE_URL: postgresql+asyncpg://user:password@db:5432/etherflow
+      INFURA_API_KEY: your_infura_api_key
 
 volumes:
   postgres_data:
