@@ -14,7 +14,7 @@ services:
 
   web:
     build: .
-    command: poetry run hypercorn app.main:app --bind 0.0.0.0:8000
+    command: ./wait_for_db.sh poetry run hypercorn app.main:app --bind 0.0.0.0:8000
     volumes:
       - .:/app
     ports:
