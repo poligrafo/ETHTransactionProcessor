@@ -8,3 +8,4 @@ RUN pip install poetry && poetry install
 COPY . .
 
 ENTRYPOINT ["poetry", "run", "alembic"]
+CMD ["upgrade", "head"]

@@ -47,6 +47,8 @@ from fastapi_cache.backends.redis import RedisBackend
 import aioredis
 from fastapi_cache.decorator import cache
 
+from app.core.config import settings
+
 app = FastAPI()
 
 
@@ -61,3 +63,10 @@ async def startup():
 async def get_cached_data():
     return {"data": "This is cached"}
 
+
+def main():
+    print(f"Loaded settings: {settings.dict()}")
+
+
+if __name__ == "__main__":
+    main()

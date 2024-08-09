@@ -2,12 +2,16 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    # DATABASE_URL: str = "postgresql+asyncpg://user:password@db/etherflow"
     DATABASE_URL: str
-    # LOG_LEVEL: str = "INFO"
+    POSTGRES_DB: str
+    POSTGRES_USER: str
+    POSTGRES_PASSWORD: str
+    INFURA_API_KEY: str
 
     class Config:
         env_file = ".env"
 
 
 settings = Settings()
+
+print(f"Loaded settings: {settings.dict()}")
