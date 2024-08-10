@@ -1,12 +1,12 @@
+import requests
 import os
 import gzip
 import pandas as pd
-from datetime import datetime, timedelta
-import requests
 import logging
 from sqlalchemy.orm import Session
 from app.db.session import SessionLocal
 from app.models.transaction_models import Transaction
+from datetime import datetime, timedelta
 
 logger = logging.getLogger(__name__)
 
@@ -15,8 +15,10 @@ def download_ethereum_transactions_dump():
     yesterday = datetime.now() - timedelta(days=1)
     date_str = yesterday.strftime('%Y%m%d')
 
-    url = f'https://gz.blockchair.com/ethereum/transactions/blockchair_ethereum_transactions_{date_str}.tsv.gz'
-    local_filename = f'/app/data/blockchair_ethereum_transactions_{date_str}.tsv.gz'
+    # url = f'https://gz.blockchair.com/ethereum/transactions/blockchair_ethereum_transactions_{date_str}.tsv.gz'
+    # local_filename = f'/app/data/blockchair_ethereum_transactions_{date_str}.tsv.gz'
+    url = f'https://gz.blockchair.com/ethereum/transactions/blockchair_ethereum_transactions_20150730.tsv.gz'
+    local_filename = f'/app/data/blockchair_ethereum_transactions_20150730.tsv.gz'
 
     if not os.path.exists(local_filename):
         with requests.get(url, stream=True) as r:
@@ -31,7 +33,7 @@ def download_ethereum_transactions_dump():
     return local_filename
 
 
-def process_and_save_transactions(file_path):
+def process_and_save_transactions(file_path: str):
     logger.info(f"Processing the file {file_path}")
     try:
         with gzip.open(file_path, 'rt') as f:
@@ -40,27 +42,12 @@ def process_and_save_transactions(file_path):
         transactions = []
         for _, row in df.iterrows():
             transaction = Transaction(
-                hash=row['hash'],
-                time=row['time'],
-                failed=bool(row['failed']),
-                type=row['type'],
-                from_address=row['sender'],
-                to_address=row['recipient'],
-                call_count=int(row['call_count']),
-                value=row['value'],
-                value_usd=row['value_usd'],
-                internal_value=row['internal_value'],
-                internal_value_usd=row['internal_value_usd'],
-                fee=row['fee'],
-                fee_usd=row['fee_usd'],
-                gas_used=int(row['gas_used']),
-                gas_limit=int(row['gas_limit']),
-                gas_price=row['gas_price'],
-                input_hex=row['input_hex'],
-                nonce=int(row['nonce']) if pd.notnull(row['nonce']) else None,
-                v=row['v'],
-                r=row['r'],
-                s=row['s'],
+                hash=row['hash'] if pd.notnull(row['hash']) else None,
+                from_address=row['sender'] if pd.notnull(row['sender']) else None,
+                to_address=row['recipient'] if pd.notnull(row['recipient']) else None,
+                value=row['value'] if pd.notnull(row['value']) else None,
+                gas=int(row['gas_used']) if pd.notnull(row['gas_used']) else None,
+                gas_price=row['gas_price'] if pd.notnull(row['gas_price']) else None,
                 block_number=int(row['block_id']) if pd.notnull(row['block_id']) else None,
             )
             transactions.append(transaction)

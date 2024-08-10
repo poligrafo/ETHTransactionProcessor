@@ -1,24 +1,44 @@
 from celery import Celery
+from celery.schedules import crontab
+import os
 
-from app.core.settings import settings
-from app.core.logging import setup_logging
 
-setup_logging()
+class CeleryConfig:
+    REDIS_URL = os.getenv('REDIS_URL', 'redis://localhost:6388/0')
 
-celery_app = Celery(
-    "worker",
-    broker=settings.CELERY_BROKER_URL,
-    backend=settings.CELERY_RESULT_BACKEND
-)
+    CELERY_BROKER_URL = REDIS_URL
+    CELERY_RESULT_BACKEND = REDIS_URL
+    CELERY_TIMEZONE = 'UTC'
+    CELERY_ENABLE_UTC = True
+    BROKER_CONNECTION_RETRY_ON_STARTUP = True
+    TASK_TRACK_STARTED = True
 
-celery_app.conf.update(
-    task_serializer='json',
-    accept_content=['json'],
-    result_serializer='json',
-    timezone=settings.CELERY_TIMEZONE,
-    enable_utc=settings.CELERY_ENABLE_UTC,
-    broker_connection_retry_on_startup=settings.BROKER_CONNECTION_RETRY_ON_STARTUP,
-)
+    CELERY_BEAT_SCHEDULE = {
+        'download_yesterday_dump_every_day': {
+            'task': 'app.celery.tasks.download_yesterday_dump_task',
+            'schedule': crontab(minute=17, hour=17),  # Ежедневно в 16:21 UTC
+        },
+    }
 
-celery_app.conf.beat_schedule = settings.CELERY_BEAT_SCHEDULE
 
+def create_celery_app():
+    celery_app = Celery(
+        'worker',
+        broker=CeleryConfig.CELERY_BROKER_URL,
+        backend=CeleryConfig.CELERY_RESULT_BACKEND
+    )
+
+    celery_app.conf.update(
+        task_track_started=CeleryConfig.TASK_TRACK_STARTED,
+        timezone=CeleryConfig.CELERY_TIMEZONE,
+        enable_utc=CeleryConfig.CELERY_ENABLE_UTC,
+        broker_connection_retry_on_startup=CeleryConfig.BROKER_CONNECTION_RETRY_ON_STARTUP,
+        beat_schedule=CeleryConfig.CELERY_BEAT_SCHEDULE,
+    )
+
+    celery_app.autodiscover_tasks(['app.celery.tasks'])
+
+    return celery_app
+
+
+celery_app = create_celery_app()
