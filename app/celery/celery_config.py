@@ -1,5 +1,5 @@
 from celery import Celery
-from celery.schedules import crontab
+
 from app.core.settings import settings
 from app.core.logging import setup_logging
 
@@ -8,7 +8,7 @@ setup_logging()
 celery_app = Celery(
     "worker",
     broker=settings.CELERY_BROKER_URL,
-    backend=settings.CELERY_RESULT_BACKEND,
+    backend=settings.CELERY_RESULT_BACKEND
 )
 
 celery_app.conf.update(
@@ -21,3 +21,4 @@ celery_app.conf.update(
 )
 
 celery_app.conf.beat_schedule = settings.CELERY_BEAT_SCHEDULE
+

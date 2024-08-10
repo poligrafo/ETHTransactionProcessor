@@ -16,7 +16,7 @@ class Settings(BaseSettings):
     CELERY_BEAT_SCHEDULE: ClassVar[Dict[str, Dict[str, Any]]] = {
         'download_yesterday_dump_every_day': {
             'task': 'app.celery.tasks.download_yesterday_dump_task',
-            'schedule': crontab(minute='42', hour='12'),  # Daily at 04:00 UTC (+3 MSK)
+            'schedule': crontab(minute='55', hour='13'),  # Daily at 04:00 UTC (+3 MSK)
         },
     }
 

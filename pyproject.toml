@@ -25,6 +25,8 @@ fastapi-cache2 = "^0.2.2"
 requests = "^2.32.3"
 celery = "^5.4.0"
 redis = "^5.0.8"
+pandas = "^2.2.2"
+pip = "^24.2"
 
 
 [build-system]
