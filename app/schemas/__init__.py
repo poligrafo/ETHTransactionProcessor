@@ -1,1 +1,1 @@
-from app.schemas.transaction_schemas import Transaction, TransactionCreate, TransactionBase
+from app.schemas.transaction_schemas import TransactionOut, TransactionStats

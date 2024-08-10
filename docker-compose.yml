@@ -24,7 +24,12 @@ services:
 
   web:
     build: .
-    command: poetry run hypercorn app.main:app --bind 0.0.0.0:8000
+    command: >
+      sh -c "
+      mkdir -p /app/app/logs &&
+      chmod -R 777 /app/app/logs &&
+      poetry run hypercorn app.main:app --bind 0.0.0.0:8000
+      "
     volumes:
       - .:/app
     ports:
@@ -42,7 +47,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.alembic
-    command: alembic upgrade head
+    command: poetry run alembic upgrade head
     depends_on:
       db:
         condition: service_healthy
@@ -54,6 +59,18 @@ services:
   celery:
     build: .
     command: poetry run celery -A app.celery.celery_config.celery_app worker --loglevel=info
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      INFURA_API_KEY: ${INFURA_API_KEY}
+
+  celery_beat:
+    build: .
+    command: poetry run celery -A app.celery.celery_config.celery_app beat --loglevel=info
     depends_on:
       db:
         condition: service_healthy

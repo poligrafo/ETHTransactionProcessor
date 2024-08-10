@@ -41,32 +41,41 @@
 #     return {"status": "Service is running", "version": "1.0.0"}
 
 
+import logging
 from fastapi import FastAPI
-from fastapi_cache import FastAPICache
-from fastapi_cache.backends.redis import RedisBackend
-import aioredis
-from fastapi_cache.decorator import cache
+from app.api.v1.endpoints.transactions import router as transactions_router
+from app.core.logging import setup_logging
+from fastapi.middleware.cors import CORSMiddleware
 
-from app.core.config import settings
+setup_logging()
+logger = logging.getLogger(__name__)
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.on_event("startup")
-async def startup():
-    redis = aioredis.from_url("redis://redis:6379")
-    FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
+async def startup_event():
+    logger.info("Starting up the application...")
 
 
-@app.get("/cached-data")
-@cache(expire=60)
-async def get_cached_data():
-    return {"data": "This is cached"}
+@app.on_event("shutdown")
+async def shutdown_event():
+    logger.info("Shutting down the application...")
+
+app.include_router(transactions_router, prefix="/api/v1/transactions", tags=["transactions"])
 
 
-def main():
-    print(f"Loaded settings: {settings.dict()}")
+@app.get("/")
+async def root():
+    logger.info("Handling root endpoint")
+    return {"message": "Ethereum Transaction Processor API"}
 
 
-if __name__ == "__main__":
-    main()

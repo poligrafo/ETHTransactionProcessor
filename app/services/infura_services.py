@@ -3,7 +3,6 @@ import requests
 import json
 
 
-
 class InfuraService:
     def __init__(self):
         self.infura_url = f'https://mainnet.infura.io/v3/{os.getenv("INFURA_API_KEY")}'
