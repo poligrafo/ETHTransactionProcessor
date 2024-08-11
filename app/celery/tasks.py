@@ -1,4 +1,4 @@
-import os
+import asyncio
 import logging
 
 from app.celery.celery_config import celery_app
@@ -19,7 +19,7 @@ def download_yesterday_dump_task():
     try:
         file_path = download_ethereum_transactions_dump()
         logger.info(f"File downloaded successfully: {file_path}")
-        process_and_save_transactions(file_path)
+        asyncio.run(process_and_save_transactions(file_path))
         logger.info("Transactions processed and saved successfully.")
     except Exception as e:
         logger.error(f"Error in downloading or processing the file: {str(e)}")

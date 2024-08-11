@@ -54,3 +54,155 @@
 [2024-08-10 16:31:13,611] INFO in logging: Running on http://0.0.0.0:8000 (CTRL + C to quit)
 [2024-08-10 17:16:07,649] INFO in main: Starting up the application...
 [2024-08-10 17:16:07,649] INFO in logging: Running on http://0.0.0.0:8000 (CTRL + C to quit)
+[2024-08-10 17:23:46,801] INFO in main: Starting up the application...
+[2024-08-10 17:23:46,801] INFO in logging: Running on http://0.0.0.0:8000 (CTRL + C to quit)
+[2024-08-10 17:26:30,626] INFO in main: Starting up the application...
+[2024-08-10 17:26:30,627] INFO in logging: Running on http://0.0.0.0:8000 (CTRL + C to quit)
+[2024-08-10 17:30:11,041] INFO in main: Starting up the application...
+[2024-08-10 17:30:11,042] INFO in logging: Running on http://0.0.0.0:8000 (CTRL + C to quit)
+[2024-08-10 17:33:32,140] INFO in main: Starting up the application...
+[2024-08-10 17:33:32,140] INFO in logging: Running on http://0.0.0.0:8000 (CTRL + C to quit)
+[2024-08-10 17:36:16,017] INFO in main: Starting up the application...
+[2024-08-10 17:36:16,018] INFO in logging: Running on http://0.0.0.0:8000 (CTRL + C to quit)
+[2024-08-10 17:37:05,217] INFO in main: Starting up the application...
+[2024-08-10 17:37:05,217] INFO in logging: Running on http://0.0.0.0:8000 (CTRL + C to quit)
+[2024-08-10 17:37:40,685] INFO in main: Starting up the application...
+[2024-08-10 17:37:40,685] INFO in logging: Running on http://0.0.0.0:8000 (CTRL + C to quit)
+[2024-08-10 17:41:18,858] INFO in main: Starting up the application...
+[2024-08-10 17:41:18,858] INFO in logging: Running on http://0.0.0.0:8000 (CTRL + C to quit)
+[2024-08-10 17:41:53,470] INFO in main: Starting up the application...
+[2024-08-10 17:41:53,470] INFO in logging: Running on http://0.0.0.0:8000 (CTRL + C to quit)
+[2024-08-10 17:47:18,358] INFO in main: Handling root endpoint
+[2024-08-10 17:48:39,694] INFO in base: select pg_catalog.version()
+[2024-08-10 17:48:39,694] INFO in base: [raw sql] ()
+[2024-08-10 17:48:39,696] INFO in base: select current_schema()
+[2024-08-10 17:48:39,696] INFO in base: [raw sql] ()
+[2024-08-10 17:48:39,697] INFO in base: show standard_conforming_strings
+[2024-08-10 17:48:39,697] INFO in base: [raw sql] ()
+[2024-08-10 17:48:39,698] INFO in base: BEGIN (implicit)
+[2024-08-10 17:48:39,701] INFO in base: SELECT transactions.id, transactions.hash, transactions.from_address, transactions.to_address, transactions.value, transactions.gas, transactions.gas_price, transactions.fee, transactions.nonce, transactions.block_number, transactions.time, transactions.input_hex 
+FROM transactions 
+ LIMIT $1::INTEGER OFFSET $2::INTEGER
+[2024-08-10 17:48:39,701] INFO in base: [generated in 0.00018s] (10, 0)
+[2024-08-10 17:48:39,703] INFO in transactions: Fetched 10 transactions
+[2024-08-10 17:48:39,706] INFO in base: ROLLBACK
+[2024-08-10 17:48:58,975] INFO in base: BEGIN (implicit)
+[2024-08-10 17:48:58,977] INFO in base: SELECT count(transactions.id) AS count_1 
+FROM transactions
+[2024-08-10 17:48:58,977] INFO in base: [generated in 0.00038s] ()
+[2024-08-10 17:48:58,992] INFO in base: SELECT avg(transactions.gas_price) AS avg_1 
+FROM transactions
+[2024-08-10 17:48:58,992] INFO in base: [generated in 0.00025s] ()
+[2024-08-10 17:48:58,997] INFO in transactions: Transaction stats: {'total_count': 17113, 'avg_gas_price': Decimal('0E-24')}
+[2024-08-10 17:48:58,997] INFO in base: ROLLBACK
+[2024-08-10 17:49:53,433] INFO in base: BEGIN (implicit)
+[2024-08-10 17:49:53,435] INFO in base: SELECT transactions.id, transactions.hash, transactions.from_address, transactions.to_address, transactions.value, transactions.gas, transactions.gas_price, transactions.fee, transactions.nonce, transactions.block_number, transactions.time, transactions.input_hex 
+FROM transactions 
+WHERE transactions.hash = $1::VARCHAR
+[2024-08-10 17:49:53,435] INFO in base: [generated in 0.00054s] ('\\N',)
+[2024-08-10 17:49:53,876] INFO in base: ROLLBACK
+[2024-08-10 17:49:53,877] ERROR in logging: Error in ASGI Framework
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/hypercorn/asyncio/task_group.py", line 27, in _handle
+    await app(scope, receive, send, sync_spawn, call_soon)
+  File "/usr/local/lib/python3.10/site-packages/hypercorn/app_wrappers.py", line 34, in __call__
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.10/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/usr/local/lib/python3.10/site-packages/starlette/applications.py", line 123, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.10/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/usr/local/lib/python3.10/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.10/site-packages/starlette/middleware/cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.10/site-packages/starlette/middleware/exceptions.py", line 65, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.10/site-packages/starlette/_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.10/site-packages/starlette/routing.py", line 756, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.10/site-packages/starlette/routing.py", line 776, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.10/site-packages/starlette/routing.py", line 297, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.10/site-packages/starlette/routing.py", line 77, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.10/site-packages/starlette/_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.10/site-packages/starlette/routing.py", line 72, in app
+    response = await func(request)
+  File "/usr/local/lib/python3.10/site-packages/fastapi/routing.py", line 278, in app
+    raw_response = await run_endpoint_function(
+  File "/usr/local/lib/python3.10/site-packages/fastapi/routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/app/app/api/v1/endpoints/transactions.py", line 92, in get_transaction
+    transaction = await get_transaction_by_hash(db, tx_hash)
+  File "/app/app/crud/transaction_crud.py", line 32, in get_transaction_by_hash
+    return result.scalar_one_or_none()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/result.py", line 1487, in scalar_one_or_none
+    return self._only_one_row(
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/result.py", line 805, in _only_one_row
+    raise exc.MultipleResultsFound(
+sqlalchemy.exc.MultipleResultsFound: Multiple rows were found when one or none was required
+[2024-08-10 17:50:20,554] INFO in transactions: Triggered transaction update task
+[2024-08-10 17:54:29,320] INFO in main: Starting up the application...
+[2024-08-10 17:54:29,320] INFO in logging: Running on http://0.0.0.0:8000 (CTRL + C to quit)
+[2024-08-10 17:55:25,905] INFO in transactions: Triggered transaction update task
+[2024-08-10 17:56:10,258] INFO in base: select pg_catalog.version()
+[2024-08-10 17:56:10,259] INFO in base: [raw sql] ()
+[2024-08-10 17:56:10,262] INFO in base: select current_schema()
+[2024-08-10 17:56:10,262] INFO in base: [raw sql] ()
+[2024-08-10 17:56:10,264] INFO in base: show standard_conforming_strings
+[2024-08-10 17:56:10,265] INFO in base: [raw sql] ()
+[2024-08-10 17:56:10,267] INFO in base: BEGIN (implicit)
+[2024-08-10 17:56:10,273] INFO in base: SELECT count(transactions.id) AS count_1 
+FROM transactions
+[2024-08-10 17:56:10,273] INFO in base: [generated in 0.00046s] ()
+[2024-08-10 17:56:10,282] INFO in base: SELECT avg(transactions.gas_price) AS avg_1 
+FROM transactions
+[2024-08-10 17:56:10,282] INFO in base: [generated in 0.00019s] ()
+[2024-08-10 17:56:10,286] INFO in transactions: Transaction stats: {'total_count': 28249, 'avg_gas_price': Decimal('11419238154.97206981')}
+[2024-08-10 17:56:10,287] INFO in base: ROLLBACK
+[2024-08-10 17:57:07,861] INFO in base: BEGIN (implicit)
+[2024-08-10 17:57:07,865] INFO in base: SELECT transactions.id, transactions.hash, transactions.from_address, transactions.to_address, transactions.value, transactions.gas, transactions.gas_price, transactions.fee, transactions.nonce, transactions.block_number, transactions.time, transactions.input_hex 
+FROM transactions 
+ LIMIT $1::INTEGER OFFSET $2::INTEGER
+[2024-08-10 17:57:07,865] INFO in base: [generated in 0.00047s] (10, 0)
+[2024-08-10 17:57:07,869] INFO in transactions: Fetched 10 transactions
+[2024-08-10 17:57:07,870] INFO in base: ROLLBACK
+[2024-08-10 17:58:59,902] INFO in base: BEGIN (implicit)
+[2024-08-10 17:58:59,905] INFO in base: SELECT transactions.id, transactions.hash, transactions.from_address, transactions.to_address, transactions.value, transactions.gas, transactions.gas_price, transactions.fee, transactions.nonce, transactions.block_number, transactions.time, transactions.input_hex 
+FROM transactions 
+WHERE transactions.hash = $1::VARCHAR
+[2024-08-10 17:58:59,905] INFO in base: [generated in 0.00023s] ('142278201f537be6d3b8ffe8f4b7279d826dab4d21d692a3e0f1bc6c78963568',)
+[2024-08-10 17:58:59,909] INFO in transactions: Fetched transaction 142278201f537be6d3b8ffe8f4b7279d826dab4d21d692a3e0f1bc6c78963568
+[2024-08-10 17:58:59,909] INFO in base: ROLLBACK
+[2024-08-10 18:01:06,914] INFO in base: BEGIN (implicit)
+[2024-08-10 18:01:06,915] INFO in base: SELECT transactions.id, transactions.hash, transactions.from_address, transactions.to_address, transactions.value, transactions.gas, transactions.gas_price, transactions.fee, transactions.nonce, transactions.block_number, transactions.time, transactions.input_hex 
+FROM transactions 
+ LIMIT $1::INTEGER OFFSET $2::INTEGER
+[2024-08-10 18:01:06,915] INFO in base: [cached since 239.1s ago] (10, 0)
+[2024-08-10 18:01:06,921] INFO in transactions: Fetched 10 transactions
+[2024-08-10 18:01:06,924] INFO in base: ROLLBACK
+[2024-08-10 18:01:21,238] INFO in base: BEGIN (implicit)
+[2024-08-10 18:01:21,239] INFO in base: SELECT transactions.id, transactions.hash, transactions.from_address, transactions.to_address, transactions.value, transactions.gas, transactions.gas_price, transactions.fee, transactions.nonce, transactions.block_number, transactions.time, transactions.input_hex 
+FROM transactions 
+ LIMIT $1::INTEGER OFFSET $2::INTEGER
+[2024-08-10 18:01:21,239] INFO in base: [cached since 253.4s ago] (10, 0)
+[2024-08-10 18:01:21,242] INFO in transactions: Fetched 10 transactions
+[2024-08-10 18:01:21,242] INFO in base: ROLLBACK
+[2024-08-10 18:01:54,054] INFO in base: BEGIN (implicit)
+[2024-08-10 18:01:54,054] INFO in base: SELECT count(transactions.id) AS count_1 
+FROM transactions
+[2024-08-10 18:01:54,055] INFO in base: [cached since 343.8s ago] ()
+[2024-08-10 18:01:54,060] INFO in base: SELECT avg(transactions.gas_price) AS avg_1 
+FROM transactions
+[2024-08-10 18:01:54,060] INFO in base: [cached since 343.8s ago] ()
+[2024-08-10 18:01:54,067] INFO in transactions: Transaction stats: {'total_count': 28249, 'avg_gas_price': Decimal('11419238154.97206981')}
+[2024-08-10 18:01:54,067] INFO in base: ROLLBACK

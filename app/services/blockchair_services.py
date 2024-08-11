@@ -17,8 +17,8 @@ def download_ethereum_transactions_dump():
 
     # url = f'https://gz.blockchair.com/ethereum/transactions/blockchair_ethereum_transactions_{date_str}.tsv.gz'
     # local_filename = f'/app/data/blockchair_ethereum_transactions_{date_str}.tsv.gz'
-    url = f'https://gz.blockchair.com/ethereum/transactions/blockchair_ethereum_transactions_20150730.tsv.gz'
-    local_filename = f'/app/data/blockchair_ethereum_transactions_20150730.tsv.gz'
+    url = f'https://gz.blockchair.com/ethereum/transactions/blockchair_ethereum_transactions_20150928.tsv.gz'
+    local_filename = f'/app/data/blockchair_ethereum_transactions_20150928.tsv.gz'
 
     if not os.path.exists(local_filename):
         with requests.get(url, stream=True) as r:
@@ -33,13 +33,17 @@ def download_ethereum_transactions_dump():
     return local_filename
 
 
-def process_and_save_transactions(file_path: str):
+async def process_and_save_transactions(file_path: str):
     logger.info(f"Processing the file {file_path}")
     try:
+        logger.info("Opening the gzip file...")
         with gzip.open(file_path, 'rt') as f:
+            logger.info("Reading the CSV content into a DataFrame...")
             df = pd.read_csv(f, delimiter='\t')
+            logger.info(f"DataFrame loaded successfully with {len(df)} rows.")
 
         transactions = []
+        logger.info("Iterating over the DataFrame rows...")
         for _, row in df.iterrows():
             transaction = Transaction(
                 hash=row['hash'] if pd.notnull(row['hash']) else None,
@@ -53,9 +57,11 @@ def process_and_save_transactions(file_path: str):
             transactions.append(transaction)
 
         logger.info(f"Inserting {len(transactions)} transactions into the database.")
-        with SessionLocal() as session:
-            session.bulk_save_objects(transactions)
-            session.commit()
+
+        async with SessionLocal() as session:
+            async with session.begin():
+                session.add_all(transactions)
+                await session.commit()
 
         logger.info("Transactions have been successfully saved to the database.")
         os.remove(file_path)
