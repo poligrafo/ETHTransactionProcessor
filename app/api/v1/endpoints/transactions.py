@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
-CACHE_EXPIRE_IN_SECONDS = 4 * 60 * 60  # 4 hours
+CACHE_EXPIRE_IN_SECONDS = 24 * 60 * 60  # 24 hours
 
 
 @router.get("/", response_model=List[TransactionOut])
