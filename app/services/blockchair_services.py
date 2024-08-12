@@ -15,10 +15,8 @@ def download_ethereum_transactions_dump():
     yesterday = datetime.now() - timedelta(days=1)
     date_str = yesterday.strftime('%Y%m%d')
 
-    # url = f'https://gz.blockchair.com/ethereum/transactions/blockchair_ethereum_transactions_{date_str}.tsv.gz'
-    # local_filename = f'/app/data/blockchair_ethereum_transactions_{date_str}.tsv.gz'
-    url = f'https://gz.blockchair.com/ethereum/transactions/blockchair_ethereum_transactions_20150928.tsv.gz'
-    local_filename = f'/app/data/blockchair_ethereum_transactions_20150928.tsv.gz'
+    url = f'https://gz.blockchair.com/ethereum/transactions/blockchair_ethereum_transactions_{date_str}.tsv.gz'
+    local_filename = f'/app/data/blockchair_ethereum_transactions_{date_str}.tsv.gz'
 
     if not os.path.exists(local_filename):
         with requests.get(url, stream=True) as r:

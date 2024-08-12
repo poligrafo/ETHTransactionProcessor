@@ -1,8 +1,9 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy import func
-from app.models.transaction_models import Transaction
 from typing import Optional
+
+from app.models.transaction_models import Transaction
 
 
 async def get_transactions(db: AsyncSession, skip: int = 0, limit: int = 50, from_address: Optional[str] = None,
