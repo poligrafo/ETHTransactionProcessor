@@ -3,7 +3,7 @@ import os
 import gzip
 import pandas as pd
 import logging
-from sqlalchemy.orm import Session
+
 from app.db.session import SessionLocal
 from app.models.transaction_models import Transaction
 from datetime import datetime, timedelta

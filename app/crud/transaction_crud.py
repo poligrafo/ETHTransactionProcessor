@@ -2,7 +2,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy import func
 from app.models.transaction_models import Transaction
-from typing import List, Optional
+from typing import Optional
 
 
 async def get_transactions(db: AsyncSession, skip: int = 0, limit: int = 50, from_address: Optional[str] = None,
@@ -32,5 +32,3 @@ async def get_transaction_stats(db: AsyncSession):
         "total_count": total_count.scalar(),
         "avg_gas_price": avg_gas_price.scalar()
     }
-
-

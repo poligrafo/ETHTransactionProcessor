@@ -2,9 +2,6 @@ import asyncio
 import logging
 from datetime import datetime
 
-from sqlalchemy.ext.asyncio import AsyncSession
-from web3.types import TxReceipt
-
 from app.celery.celery_config import celery_app
 from app.db.session import SessionLocal
 from app.models import Transaction
