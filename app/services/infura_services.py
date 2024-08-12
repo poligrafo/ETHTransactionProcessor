@@ -21,7 +21,7 @@ def handle_transaction(tx_hash):
         tx_receipt = w3.eth.get_transaction_receipt(tx_hash)
         if tx_receipt:
             logger.info(f"Processing transaction {tx_hash.hex()}")
-            fetch_and_save_latest_transactions.delay(tx_receipt)  # Use Celery for async transaction processing
+            fetch_and_save_latest_transactions.delay(tx_receipt)
     except Exception as e:
         logger.error(f"Error processing transaction {tx_hash.hex()}: {e}")
 
