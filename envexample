@@ -1,1 +1,12 @@
-DATABASE_URL="postgresql+asyncpg://user:password@db:5432/etherflow"
+POSTGRES_DB=your_database_name
+POSTGRES_USER=your_database_user
+POSTGRES_PASSWORD=your_database_password
+
+DATABASE_URL=postgresql+asyncpg://your_database_user:your_database_password@your_database_host:your_database_port/your_database_name
+
+REDIS_HOST=your_redis_host
+REDIS_PORT=your_redis_port
+REDIS_DB=your_redis_db
+REDIS_URL=redis://your_redis_host:your_redis_port/your_redis_db
+
+INFURA_API_KEY=your_api_key

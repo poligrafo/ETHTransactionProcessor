@@ -4,7 +4,7 @@ import os
 
 
 class CeleryConfig:
-    REDIS_URL = os.getenv('REDIS_URL', 'redis://localhost:6388/0')
+    REDIS_URL = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
 
     CELERY_BROKER_URL = REDIS_URL
     CELERY_RESULT_BACKEND = REDIS_URL
@@ -16,7 +16,7 @@ class CeleryConfig:
     CELERY_BEAT_SCHEDULE = {
         'download_yesterday_dump_every_day': {
             'task': 'app.celery.tasks.download_yesterday_dump_task',
-            'schedule': crontab(minute=55, hour=17),  # Daily at 04:00 UTC (+3 MSK)
+            'schedule': crontab(minute=8, hour=4),  # Daily at 04:00 UTC (+3 MSK)
         },
     }
 

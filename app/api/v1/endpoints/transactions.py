@@ -1,14 +1,11 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List, Optional
 
 from app.api.deps import get_db
 from app.core.cache import get_from_cache, set_to_cache
-from app.models import Transaction
 from app.schemas.transaction_schemas import TransactionOut, TransactionStats
-from app.services.ethereum_servises import fetch_and_save_latest_transactions
 from app.crud.transaction_crud import get_transactions, get_transaction_by_hash, get_transaction_stats
-from app.celery.tasks import fetch_and_save_transactions_task
 
 import logging
 
@@ -39,8 +36,10 @@ async def list_transactions(
     )
     logger.info(f"Fetched {len(transactions)} transactions")
 
-    await set_to_cache(cache_key, transactions, expire=CACHE_EXPIRE_IN_SECONDS)
-    return transactions
+    transactions_data = [TransactionOut.from_orm(transaction).dict() for transaction in transactions]
+
+    await set_to_cache(cache_key, transactions_data, expire=CACHE_EXPIRE_IN_SECONDS)
+    return transactions_data
 
 
 @router.get("/stats", response_model=TransactionStats)
@@ -73,13 +72,10 @@ async def get_transaction(tx_hash: str, db: AsyncSession = Depends(get_db)):
 
     logger.info(f"Fetched transaction {tx_hash}")
 
-    await set_to_cache(cache_key, transaction, expire=CACHE_EXPIRE_IN_SECONDS)
-    return transaction
+    transaction_out = TransactionOut.from_orm(transaction)
 
+    await set_to_cache(cache_key, transaction_out.dict(), expire=CACHE_EXPIRE_IN_SECONDS)
 
-@router.post("/update/")
-async def update_transactions():
-    fetch_and_save_transactions_task.delay()
-    logger.info("Triggered transaction update task")
-    return {"message": "Updating transactions in the background"}
+    return transaction_out
+
 

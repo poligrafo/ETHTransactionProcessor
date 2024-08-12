@@ -21,6 +21,13 @@ RUN mkdir -p /app/app/logs
 RUN chown -R appuser:appuser /app
 RUN chmod -R 777 /app/app/logs
 
+# Expose the application port
+EXPOSE 8000
+
+# Set environment variables
+ENV DATABASE_URL=${DATABASE_URL}
+ENV INFURA_API_KEY=${INFURA_API_KEY}
+
 # Switch to the non-root user
 USER appuser
 

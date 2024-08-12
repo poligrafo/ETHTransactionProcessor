@@ -53,6 +53,7 @@ async def process_and_save_transactions(file_path: str):
                 gas=int(row['gas_used']) if pd.notnull(row['gas_used']) else None,
                 gas_price=row['gas_price'] if pd.notnull(row['gas_price']) else None,
                 block_number=int(row['block_id']) if pd.notnull(row['block_id']) else None,
+                transaction_type=row['type'] if pd.notnull(row['type']) else None,
             )
             transactions.append(transaction)
 

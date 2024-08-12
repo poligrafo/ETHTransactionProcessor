@@ -1,4 +1,3 @@
-# /app/core/settings.py
 from pydantic_settings import BaseSettings
 
 
@@ -12,7 +11,7 @@ class Settings(BaseSettings):
     REDIS_HOST: str
     REDIS_PORT: str
     REDIS_DB: str
-    REDIS_URL: str = "redis://localhost:6388/0"
+    REDIS_URL: str = "redis://redis:6390/0"
 
     class Config:
         env_file = ".env"

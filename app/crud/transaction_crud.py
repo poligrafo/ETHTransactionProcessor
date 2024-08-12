@@ -5,9 +5,19 @@ from app.models.transaction_models import Transaction
 from typing import List, Optional
 
 
-async def get_transactions(db: AsyncSession, skip: int = 0, limit: int = 50) -> List[Transaction]:
-    result = await db.execute(select(Transaction).offset(skip).limit(limit))
-    return list(result.scalars().all())
+async def get_transactions(db: AsyncSession, skip: int = 0, limit: int = 50, from_address: Optional[str] = None,
+                           to_address: Optional[str] = None, block_number: Optional[int] = None):
+    query = select(Transaction).offset(skip).limit(limit)
+
+    if from_address:
+        query = query.filter(Transaction.from_address == from_address)
+    if to_address:
+        query = query.filter(Transaction.to_address == to_address)
+    if block_number:
+        query = query.filter(Transaction.block_number == block_number)
+
+    result = await db.execute(query)
+    return result.scalars().all()
 
 
 async def get_transaction_by_hash(db: AsyncSession, tx_hash: str) -> Optional[Transaction]:
