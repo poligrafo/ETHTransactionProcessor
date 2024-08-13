@@ -16,7 +16,7 @@ class CeleryConfig:
     CELERY_BEAT_SCHEDULE = {
         'download_yesterday_dump_every_day': {
             'task': 'app.celery.tasks.download_yesterday_dump_task',
-            'schedule': crontab(minute=8, hour=4),  # Daily at 04:00 UTC (+3 MSK)
+            'schedule': crontab(minute=0, hour=4),  # Daily at 04:00 UTC (+3 MSK)
         },
     }
 
