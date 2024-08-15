@@ -1,0 +1,128 @@
+[2024-08-15 10:34:08,551] INFO in main: Starting up the application...
+[2024-08-15 10:34:08,552] INFO in logging: Running on http://0.0.0.0:8000 (CTRL + C to quit)
+[2024-08-15 10:34:13,470] INFO in base: select pg_catalog.version()
+[2024-08-15 10:34:13,470] INFO in base: [raw sql] ()
+[2024-08-15 10:34:13,473] INFO in base: select current_schema()
+[2024-08-15 10:34:13,473] INFO in base: [raw sql] ()
+[2024-08-15 10:34:13,474] INFO in base: show standard_conforming_strings
+[2024-08-15 10:34:13,475] INFO in base: [raw sql] ()
+[2024-08-15 10:34:13,477] INFO in base: BEGIN (implicit)
+[2024-08-15 10:34:13,479] INFO in base: INSERT INTO transactions (hash, from_address, to_address, value, gas, gas_price, fee, nonce, block_number, time, input_hex, transaction_type) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR, $4::NUMERIC, $5::INTEGER, $6::NUMERIC, $7::NUMERIC, $8::INTEGER, $9::INTEGER, $10::TIMESTAMP WITHOUT TIME ZONE, $11::VARCHAR, $12::VARCHAR) RETURNING transactions.id
+[2024-08-15 10:34:13,480] INFO in base: [generated in 0.00048s] ('0x2f4228659dee1416b88e984be9b8a19fad8fa6ee8c9f7cdc0c80c7869da8bf8a', '0x32Be343B94f860124dC4fEe278FDCBD38C102D88', '0xBB9bc244D798123fDe783fCc1C72d3Bb8C189413', 0, 83057, 30000000000, 2491710000000000, 0, 1596979, datetime.datetime(2016, 5, 28, 0, 0, 48), '', '0')
+[2024-08-15 10:34:13,486] INFO in base: COMMIT
+[2024-08-15 10:34:13,487] INFO in tasks: Transaction 0x2f4228659dee1416b88e984be9b8a19fad8fa6ee8c9f7cdc0c80c7869da8bf8a processed and saved successfully.
+[2024-08-15 10:34:13,488] INFO in base: BEGIN (implicit)
+[2024-08-15 10:34:13,491] INFO in base: SELECT transactions.id, transactions.hash, transactions.from_address, transactions.to_address, transactions.value, transactions.gas, transactions.gas_price, transactions.fee, transactions.nonce, transactions.block_number, transactions.time, transactions.input_hex, transactions.transaction_type 
+FROM transactions 
+WHERE transactions.hash = $1::VARCHAR
+[2024-08-15 10:34:13,491] INFO in base: [generated in 0.00040s] ('0x2f4228659dee1416b88e984be9b8a19fad8fa6ee8c9f7cdc0c80c7869da8bf8a',)
+[2024-08-15 10:34:13,495] INFO in base: COMMIT
+[2024-08-15 10:34:13,499] INFO in main: Handling root endpoint
+[2024-08-15 10:34:13,500] INFO in _client: HTTP Request: GET http://test/ "HTTP/1.1 200 OK"
+[2024-08-15 10:37:31,654] INFO in main: Starting up the application...
+[2024-08-15 10:37:31,655] INFO in logging: Running on http://0.0.0.0:8000 (CTRL + C to quit)
+[2024-08-15 10:37:37,559] INFO in base: select pg_catalog.version()
+[2024-08-15 10:37:37,559] INFO in base: [raw sql] ()
+[2024-08-15 10:37:37,563] INFO in base: select current_schema()
+[2024-08-15 10:37:37,563] INFO in base: [raw sql] ()
+[2024-08-15 10:37:37,564] INFO in base: show standard_conforming_strings
+[2024-08-15 10:37:37,564] INFO in base: [raw sql] ()
+[2024-08-15 10:37:37,565] INFO in base: BEGIN (implicit)
+[2024-08-15 10:37:37,569] INFO in base: INSERT INTO transactions (hash, from_address, to_address, value, gas, gas_price, fee, nonce, block_number, time, input_hex, transaction_type) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR, $4::NUMERIC, $5::INTEGER, $6::NUMERIC, $7::NUMERIC, $8::INTEGER, $9::INTEGER, $10::TIMESTAMP WITHOUT TIME ZONE, $11::VARCHAR, $12::VARCHAR) RETURNING transactions.id
+[2024-08-15 10:37:37,569] INFO in base: [generated in 0.00057s] ('0x2f4228659dee1416b88e984be9b8a19fad8fa6ee8c9f7cdc0c80c7869da8bf8a', '0x32Be343B94f860124dC4fEe278FDCBD38C102D88', '0xBB9bc244D798123fDe783fCc1C72d3Bb8C189413', 0, 83057, 30000000000, 2491710000000000, 0, 1596979, datetime.datetime(2016, 5, 28, 0, 0, 48), '', '0')
+[2024-08-15 10:37:37,575] INFO in base: COMMIT
+[2024-08-15 10:37:37,577] INFO in tasks: Transaction 0x2f4228659dee1416b88e984be9b8a19fad8fa6ee8c9f7cdc0c80c7869da8bf8a processed and saved successfully.
+[2024-08-15 10:37:37,578] INFO in base: BEGIN (implicit)
+[2024-08-15 10:37:37,580] INFO in base: SELECT transactions.id, transactions.hash, transactions.from_address, transactions.to_address, transactions.value, transactions.gas, transactions.gas_price, transactions.fee, transactions.nonce, transactions.block_number, transactions.time, transactions.input_hex, transactions.transaction_type 
+FROM transactions 
+WHERE transactions.hash = $1::VARCHAR
+[2024-08-15 10:37:37,581] INFO in base: [generated in 0.00029s] ('0x2f4228659dee1416b88e984be9b8a19fad8fa6ee8c9f7cdc0c80c7869da8bf8a',)
+[2024-08-15 10:37:37,584] INFO in base: COMMIT
+[2024-08-15 10:37:37,588] INFO in main: Handling root endpoint
+[2024-08-15 10:37:37,589] INFO in _client: HTTP Request: GET http://test/ "HTTP/1.1 200 OK"
+[2024-08-15 10:38:58,862] INFO in main: Starting up the application...
+[2024-08-15 10:38:58,863] INFO in logging: Running on http://0.0.0.0:8000 (CTRL + C to quit)
+[2024-08-15 10:42:25,328] INFO in main: Starting up the application...
+[2024-08-15 10:42:25,329] INFO in logging: Running on http://0.0.0.0:8000 (CTRL + C to quit)
+[2024-08-15 10:42:30,599] INFO in base: select pg_catalog.version()
+[2024-08-15 10:42:30,600] INFO in base: [raw sql] ()
+[2024-08-15 10:42:30,601] INFO in base: select current_schema()
+[2024-08-15 10:42:30,601] INFO in base: [raw sql] ()
+[2024-08-15 10:42:30,602] INFO in base: show standard_conforming_strings
+[2024-08-15 10:42:30,602] INFO in base: [raw sql] ()
+[2024-08-15 10:42:30,603] INFO in base: BEGIN (implicit)
+[2024-08-15 10:42:30,604] INFO in base: INSERT INTO transactions (hash, from_address, to_address, value, gas, gas_price, fee, nonce, block_number, time, input_hex, transaction_type) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR, $4::NUMERIC, $5::INTEGER, $6::NUMERIC, $7::NUMERIC, $8::INTEGER, $9::INTEGER, $10::TIMESTAMP WITHOUT TIME ZONE, $11::VARCHAR, $12::VARCHAR) RETURNING transactions.id
+[2024-08-15 10:42:30,605] INFO in base: [generated in 0.00023s] ('0x2f4228659dee1416b88e984be9b8a19fad8fa6ee8c9f7cdc0c80c7869da8bf8a', '0x32Be343B94f860124dC4fEe278FDCBD38C102D88', '0xBB9bc244D798123fDe783fCc1C72d3Bb8C189413', 0, 83057, 30000000000, 2491710000000000, 0, 1596979, datetime.datetime(2016, 5, 28, 0, 0, 48), '', '0')
+[2024-08-15 10:42:30,610] INFO in base: COMMIT
+[2024-08-15 10:42:30,611] INFO in tasks: Transaction 0x2f4228659dee1416b88e984be9b8a19fad8fa6ee8c9f7cdc0c80c7869da8bf8a processed and saved successfully.
+[2024-08-15 10:42:30,612] INFO in base: BEGIN (implicit)
+[2024-08-15 10:42:30,613] INFO in base: SELECT transactions.id, transactions.hash, transactions.from_address, transactions.to_address, transactions.value, transactions.gas, transactions.gas_price, transactions.fee, transactions.nonce, transactions.block_number, transactions.time, transactions.input_hex, transactions.transaction_type 
+FROM transactions 
+WHERE transactions.hash = $1::VARCHAR
+[2024-08-15 10:42:30,613] INFO in base: [generated in 0.00017s] ('0x2f4228659dee1416b88e984be9b8a19fad8fa6ee8c9f7cdc0c80c7869da8bf8a',)
+[2024-08-15 10:42:30,617] INFO in base: COMMIT
+[2024-08-15 10:42:30,620] INFO in main: Handling root endpoint
+[2024-08-15 10:42:30,620] INFO in _client: HTTP Request: GET http://test/ "HTTP/1.1 200 OK"
+[2024-08-15 10:46:29,881] INFO in main: Starting up the application...
+[2024-08-15 10:46:29,881] INFO in logging: Running on http://0.0.0.0:8000 (CTRL + C to quit)
+[2024-08-15 10:46:35,178] INFO in base: select pg_catalog.version()
+[2024-08-15 10:46:35,178] INFO in base: [raw sql] ()
+[2024-08-15 10:46:35,180] INFO in base: select current_schema()
+[2024-08-15 10:46:35,180] INFO in base: [raw sql] ()
+[2024-08-15 10:46:35,180] INFO in base: show standard_conforming_strings
+[2024-08-15 10:46:35,181] INFO in base: [raw sql] ()
+[2024-08-15 10:46:35,182] INFO in base: BEGIN (implicit)
+[2024-08-15 10:46:35,184] INFO in base: INSERT INTO transactions (hash, from_address, to_address, value, gas, gas_price, fee, nonce, block_number, time, input_hex, transaction_type) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR, $4::NUMERIC, $5::INTEGER, $6::NUMERIC, $7::NUMERIC, $8::INTEGER, $9::INTEGER, $10::TIMESTAMP WITHOUT TIME ZONE, $11::VARCHAR, $12::VARCHAR) RETURNING transactions.id
+[2024-08-15 10:46:35,185] INFO in base: [generated in 0.00029s] ('0x2f4228659dee1416b88e984be9b8a19fad8fa6ee8c9f7cdc0c80c7869da8bf8a', '0x32Be343B94f860124dC4fEe278FDCBD38C102D88', '0xBB9bc244D798123fDe783fCc1C72d3Bb8C189413', 0, 83057, 30000000000, 2491710000000000, 0, 1596979, datetime.datetime(2016, 5, 28, 0, 0, 48), '', '0')
+[2024-08-15 10:46:35,190] INFO in base: COMMIT
+[2024-08-15 10:46:35,192] INFO in tasks: Transaction 0x2f4228659dee1416b88e984be9b8a19fad8fa6ee8c9f7cdc0c80c7869da8bf8a processed and saved successfully.
+[2024-08-15 10:46:35,192] INFO in base: BEGIN (implicit)
+[2024-08-15 10:46:35,195] INFO in base: SELECT transactions.id, transactions.hash, transactions.from_address, transactions.to_address, transactions.value, transactions.gas, transactions.gas_price, transactions.fee, transactions.nonce, transactions.block_number, transactions.time, transactions.input_hex, transactions.transaction_type 
+FROM transactions 
+WHERE transactions.hash = $1::VARCHAR
+[2024-08-15 10:46:35,195] INFO in base: [generated in 0.00040s] ('0x2f4228659dee1416b88e984be9b8a19fad8fa6ee8c9f7cdc0c80c7869da8bf8a',)
+[2024-08-15 10:46:35,199] INFO in base: COMMIT
+[2024-08-15 10:46:35,203] INFO in main: Handling root endpoint
+[2024-08-15 10:46:35,204] INFO in _client: HTTP Request: GET http://test/ "HTTP/1.1 200 OK"
+[2024-08-15 10:49:09,076] INFO in main: Starting up the application...
+[2024-08-15 10:49:09,077] INFO in logging: Running on http://0.0.0.0:8000 (CTRL + C to quit)
+[2024-08-15 10:49:14,126] INFO in base: select pg_catalog.version()
+[2024-08-15 10:49:14,126] INFO in base: [raw sql] ()
+[2024-08-15 10:49:14,129] INFO in base: select current_schema()
+[2024-08-15 10:49:14,129] INFO in base: [raw sql] ()
+[2024-08-15 10:49:14,131] INFO in base: show standard_conforming_strings
+[2024-08-15 10:49:14,131] INFO in base: [raw sql] ()
+[2024-08-15 10:49:14,133] INFO in base: BEGIN (implicit)
+[2024-08-15 10:49:14,137] INFO in base: INSERT INTO transactions (hash, from_address, to_address, value, gas, gas_price, fee, nonce, block_number, time, input_hex, transaction_type) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR, $4::NUMERIC, $5::INTEGER, $6::NUMERIC, $7::NUMERIC, $8::INTEGER, $9::INTEGER, $10::TIMESTAMP WITHOUT TIME ZONE, $11::VARCHAR, $12::VARCHAR) RETURNING transactions.id
+[2024-08-15 10:49:14,137] INFO in base: [generated in 0.00051s] ('0x2f4228659dee1416b88e984be9b8a19fad8fa6ee8c9f7cdc0c80c7869da8bf8a', '0x32Be343B94f860124dC4fEe278FDCBD38C102D88', '0xBB9bc244D798123fDe783fCc1C72d3Bb8C189413', 0, 83057, 30000000000, 2491710000000000, 0, 1596979, datetime.datetime(2016, 5, 28, 0, 0, 48), '', '0')
+[2024-08-15 10:49:14,143] INFO in base: COMMIT
+[2024-08-15 10:49:14,144] INFO in tasks: Transaction 0x2f4228659dee1416b88e984be9b8a19fad8fa6ee8c9f7cdc0c80c7869da8bf8a processed and saved successfully.
+[2024-08-15 10:49:14,145] INFO in base: BEGIN (implicit)
+[2024-08-15 10:49:14,147] INFO in base: SELECT transactions.id, transactions.hash, transactions.from_address, transactions.to_address, transactions.value, transactions.gas, transactions.gas_price, transactions.fee, transactions.nonce, transactions.block_number, transactions.time, transactions.input_hex, transactions.transaction_type 
+FROM transactions 
+WHERE transactions.hash = $1::VARCHAR
+[2024-08-15 10:49:14,148] INFO in base: [generated in 0.00041s] ('0x2f4228659dee1416b88e984be9b8a19fad8fa6ee8c9f7cdc0c80c7869da8bf8a',)
+[2024-08-15 10:49:14,151] INFO in base: COMMIT
+[2024-08-15 10:49:14,155] INFO in main: Handling root endpoint
+[2024-08-15 10:49:14,156] INFO in _client: HTTP Request: GET http://test/ "HTTP/1.1 200 OK"
+[2024-08-15 10:51:04,842] INFO in main: Starting up the application...
+[2024-08-15 10:51:04,843] INFO in logging: Running on http://0.0.0.0:8000 (CTRL + C to quit)
+[2024-08-15 10:51:09,684] INFO in base: select pg_catalog.version()
+[2024-08-15 10:51:09,684] INFO in base: [raw sql] ()
+[2024-08-15 10:51:09,686] INFO in base: select current_schema()
+[2024-08-15 10:51:09,686] INFO in base: [raw sql] ()
+[2024-08-15 10:51:09,687] INFO in base: show standard_conforming_strings
+[2024-08-15 10:51:09,687] INFO in base: [raw sql] ()
+[2024-08-15 10:51:09,688] INFO in base: BEGIN (implicit)
+[2024-08-15 10:51:09,689] INFO in base: INSERT INTO transactions (hash, from_address, to_address, value, gas, gas_price, fee, nonce, block_number, time, input_hex, transaction_type) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR, $4::NUMERIC, $5::INTEGER, $6::NUMERIC, $7::NUMERIC, $8::INTEGER, $9::INTEGER, $10::TIMESTAMP WITHOUT TIME ZONE, $11::VARCHAR, $12::VARCHAR) RETURNING transactions.id
+[2024-08-15 10:51:09,690] INFO in base: [generated in 0.00025s] ('0x2f4228659dee1416b88e984be9b8a19fad8fa6ee8c9f7cdc0c80c7869da8bf8a', '0x32Be343B94f860124dC4fEe278FDCBD38C102D88', '0xBB9bc244D798123fDe783fCc1C72d3Bb8C189413', 0, 83057, 30000000000, 2491710000000000, 0, 1596979, datetime.datetime(2016, 5, 28, 0, 0, 48), '', '0')
+[2024-08-15 10:51:09,692] INFO in base: COMMIT
+[2024-08-15 10:51:09,693] INFO in tasks: Transaction 0x2f4228659dee1416b88e984be9b8a19fad8fa6ee8c9f7cdc0c80c7869da8bf8a processed and saved successfully.
+[2024-08-15 10:51:09,694] INFO in base: BEGIN (implicit)
+[2024-08-15 10:51:09,695] INFO in base: SELECT transactions.id, transactions.hash, transactions.from_address, transactions.to_address, transactions.value, transactions.gas, transactions.gas_price, transactions.fee, transactions.nonce, transactions.block_number, transactions.time, transactions.input_hex, transactions.transaction_type 
+FROM transactions 
+WHERE transactions.hash = $1::VARCHAR
+[2024-08-15 10:51:09,695] INFO in base: [generated in 0.00018s] ('0x2f4228659dee1416b88e984be9b8a19fad8fa6ee8c9f7cdc0c80c7869da8bf8a',)
+[2024-08-15 10:51:09,697] INFO in base: COMMIT
+[2024-08-15 10:51:09,700] INFO in main: Handling root endpoint
+[2024-08-15 10:51:09,701] INFO in _client: HTTP Request: GET http://test/ "HTTP/1.1 200 OK"

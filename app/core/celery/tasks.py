@@ -1,12 +1,13 @@
 import asyncio
 import logging
 from datetime import datetime
+from typing import Dict, Any
 
-from app.celery.celery_config import celery_app
+from app.core.celery.celery_config import celery_app
+from app.core.providers.web3_provider import w3
 from app.db.session import SessionLocal
 from app.models import Transaction
-from app.providers.web3_provider import w3
-from app.services.blockchair_services import download_ethereum_transactions_dump, process_and_save_transactions
+from app.services.blockchair_services import EthereumTransactionsDownloader, EthereumTransactionsProcessor
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -17,7 +18,7 @@ logger.addHandler(handler)
 
 
 @celery_app.task
-async def fetch_and_save_latest_transactions(tx_receipt):
+async def fetch_and_save_latest_transactions(tx_receipt: Dict[str, Any]) -> None:
     """
     Fetches and saves the latest transactions to the database.
     """
@@ -49,12 +50,18 @@ async def fetch_and_save_latest_transactions(tx_receipt):
 
 
 @celery_app.task
-def download_yesterday_dump_task():
+def download_yesterday_dump_task() -> None:
+    """
+    Task to download yesterday's Ethereum transactions dump, process, and save them.
+    """
     logger.info("Starting task to download yesterday's Ethereum transactions dump.")
     try:
-        file_path = download_ethereum_transactions_dump()
+        downloader = EthereumTransactionsDownloader()
+        file_path = downloader.download()
         logger.info(f"File downloaded successfully: {file_path}")
-        asyncio.run(process_and_save_transactions(file_path))
+
+        processor = EthereumTransactionsProcessor(file_path)
+        asyncio.run(processor.process())
         logger.info("Transactions processed and saved successfully.")
     except Exception as e:
         logger.error(f"Error in downloading or processing the file: {str(e)}")

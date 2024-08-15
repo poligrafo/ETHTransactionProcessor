@@ -1,6 +1,6 @@
 import pytest
 from web3 import Web3
-from app.celery.tasks import fetch_and_save_latest_transactions
+from app.core.celery.tasks import fetch_and_save_latest_transactions
 from app.db.session import SessionLocal
 from app.models.transaction_models import Transaction
 from sqlalchemy.future import select

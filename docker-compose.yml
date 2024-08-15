@@ -65,7 +65,7 @@ services:
 
   celery:
     build: .
-    command: poetry run celery -A app.celery.celery_config.celery_app worker --loglevel=info
+    command: poetry run celery -A app.core.celery.celery_config.celery_app worker --loglevel=info
     depends_on:
       db:
         condition: service_healthy
@@ -78,7 +78,7 @@ services:
 
   celery_beat:
     build: .
-    command: poetry run celery -A app.celery.celery_config.celery_app beat --loglevel=info
+    command: poetry run celery -A app.core.celery.celery_config.celery_app beat --loglevel=info
     depends_on:
       db:
         condition: service_healthy

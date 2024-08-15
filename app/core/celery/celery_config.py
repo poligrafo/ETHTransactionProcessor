@@ -15,13 +15,13 @@ class CeleryConfig:
 
     CELERY_BEAT_SCHEDULE = {
         'download_yesterday_dump_every_day': {
-            'task': 'app.celery.tasks.download_yesterday_dump_task',
+            'task': 'app.core.celery.tasks.download_yesterday_dump_task',
             'schedule': crontab(minute=0, hour=4),  # Daily at 04:00 UTC (+3 MSK)
         },
     }
 
 
-def create_celery_app():
+def create_celery_app() -> Celery:
     celery_app = Celery(
         'worker',
         broker=CeleryConfig.CELERY_BROKER_URL,
@@ -36,7 +36,7 @@ def create_celery_app():
         beat_schedule=CeleryConfig.CELERY_BEAT_SCHEDULE,
     )
 
-    celery_app.autodiscover_tasks(['app.celery.tasks'])
+    celery_app.autodiscover_tasks(['app.core.celery.tasks'])
 
     return celery_app
 
